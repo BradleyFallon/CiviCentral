@@ -1,0 +1,55 @@
+/* Variables for color scheme */
+:root {
+  --civi-dark: #23226f;
+  --civi-muted: #6f92b4;
+  --civi-bright: #58FFED;
+  --civi-accent: #29D958;
+  --civi-light: #d7f1e7;
+}
+
+/* Typography */
+body {
+  background-color: var(--civi-light);
+  color: var(--civi-dark);
+  font-family: 'Roboto', sans-serif;
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lato', sans-serif;
+}
+
+/* Navigation */
+nav {
+  background-color: var(--civi-dark);
+  font-size: 1.1em;
+}
+
+nav a {
+  color: var(--civi-light);
+  text-decoration: none;
+  padding: 0.5em 1em;
+}
+
+nav a:hover {
+  color: var(--civi-accent);
+}
+
+/* Main content area */
+main {
+  padding: 1em;
+}
+
+/* Footer */
+footer {
+  background-color: var(--civi-muted);
+  color: var(--civi-light);
+  padding: 1em;
+  text-align: center;
+}
+
+.comment-tree-line {
+  border-left: 1px solid #ccc;
+  padding-left: 16px;
+  margin-bottom: 16px;
+}
