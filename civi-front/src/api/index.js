@@ -7,6 +7,16 @@ export const getUsers = async () => {
     return response.data;
 };
 
+export const postVote = async (voteData) => {
+  try {
+    const response = await axios.post(`${API_BASE_URL}vote`, voteData);
+    return response.data;
+  } catch (error) {
+    console.error("Error posting vote:", error);
+    throw error;
+  }
+};
+
 export const getDiscussions = async () => {
     const response = await axios.get(`${API_BASE_URL}discussions/`);
     return response.data;

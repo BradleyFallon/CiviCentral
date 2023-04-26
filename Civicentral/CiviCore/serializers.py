@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from django.contrib.contenttypes.models import ContentType
 from .models import (
     User,
     Category,
@@ -53,6 +54,7 @@ class DiscussionSerializer(serializers.ModelSerializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     created_by = UserSerializer(read_only=True)
+    total_votes = serializers.ReadOnlyField()
 
     class Meta:
         model = Comment
@@ -65,6 +67,7 @@ class CommentSerializer(serializers.ModelSerializer):
             "discussion",
             "parent_comment",
             "replies",
+            "total_votes",
         )
         read_only_fields = ("replies",)
 
@@ -77,19 +80,24 @@ class CommentSerializer(serializers.ModelSerializer):
         replies = obj.comment_set.all()
         return CommentSerializer(replies, many=True, read_only=True).data
 
-    replies = serializers.SerializerMethodField()
+    def get_votes(self, obj):
+        comment_content_type = ContentType.objects.get_for_model(Comment)
+        votes = Vote.objects.filter(content_type=comment_content_type, object_id=obj.id)
+        return VoteSerializer(votes, many=True, read_only=True).data
 
+    replies = serializers.SerializerMethodField()
 
 
 class IssueSerializer(serializers.ModelSerializer):
     class Meta:
         model = Issue
         fields = ("id", "title", "description", "created_at", "updated_at", "created_by")
-
+        
 class VoteSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
     class Meta:
         model = Vote
-        fields = ("id", "vote_value", "vote_weight", "user", "issue")
+        fields = ("id", "user", "vote_type", "content_type", "object_id")
 
 class EndorsementSerializer(serializers.ModelSerializer):
     class Meta:

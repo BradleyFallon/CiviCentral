@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Sum
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericRelation
@@ -75,11 +76,11 @@ class Tag(models.Model):
 
 class Vote(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    vote_type = models.IntegerField(choices=[(1, 'Upvote'), (-1, 'Downvote')])
+    vote_type = models.IntegerField(choices=[(1, 'Upvote'), (-1, 'Downvote')], default=1)
 
     # Add these fields for Generic Foreign Key
-    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE)
-    object_id = models.PositiveIntegerField()
+    content_type = models.ForeignKey(ContentType, on_delete=models.CASCADE, null=True)
+    object_id = models.PositiveIntegerField(null=True)
     content_object = GenericForeignKey('content_type', 'object_id')
 
 
@@ -112,6 +113,10 @@ class Comment(models.Model):
     )
     
     votes = GenericRelation(Vote)
+
+    @property
+    def total_votes(self):
+        return self.votes.aggregate(total=Sum('vote_type'))['total'] or 0
 
     def __str__(self):
         return self.content

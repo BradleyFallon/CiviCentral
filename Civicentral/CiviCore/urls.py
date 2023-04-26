@@ -4,6 +4,7 @@ from .views import (
     index,
     get_comments,
     create_comment,
+    vote,
     UserViewSet,
     CategoryViewSet,
     DiscussionViewSet,
@@ -30,5 +31,6 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path("api/discussions/<int:discussion_id>/comments/", get_comments),
     path("api/discussions/<int:discussion_id>/comments/create/", create_comment, name='create_comment'),
+    path("api/vote", vote, name="vote"),
     path("", index, name="index"),
 ]
