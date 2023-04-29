@@ -56,7 +56,7 @@ const DiscussionDetail = () => {
   return (
     <Container maxWidth="md">
       
-      <Paper elevation={12} style={{ padding: '16px', marginBottom: '16px' }}>
+      <Paper elevation={12} style={{ padding: '16px', marginBottom: '16px', /*var(--civi-bright)*/ background: '#c4faf5' }}>
       <h1>{discussion.title}</h1>
       <Paper elevation={2} style={{ padding: '16px', marginBottom: '16px' }}>
       <p>{discussion.description}</p>

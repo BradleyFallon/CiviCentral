@@ -1,3 +1,5 @@
+// File: theme.js
+// This file is used to override the default theme of Material UI.
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -18,7 +20,7 @@ const theme = createTheme({
             main: '#d7f1e7', // --civi-light
         },
         background: {
-            default: '#d7f1e7', // --civi-light
+            default: '#1a1a4b', // --civi-darker
         },
         text: {
             primary: '#23226f', // --civi-dark

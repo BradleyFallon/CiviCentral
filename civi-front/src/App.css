@@ -1,15 +1,18 @@
 /* Variables for color scheme */
 :root {
   --civi-dark: #23226f;
+  --civi-darker: #1a1a4b;
   --civi-muted: #6f92b4;
-  --civi-bright: #58FFED;
+  --civi-bright: #c4faf5;
   --civi-accent: #29D958;
-  --civi-light: #d7f1e7;
+  --civi-light: #c6e9dc;
+  --civi-lighter: #dff1ea;
+  --civi-lightest: #f5f9f7;
 }
 
 /* Typography */
 body {
-  background-color: var(--civi-light);
+  background-color: var(--civi-lightest);
   color: var(--civi-dark);
   font-family: 'Roboto', sans-serif;
   line-height: 1.6;
